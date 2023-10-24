@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfRandomTesting.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfRandomTesting"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        FontSize="15"
+        FontFamily="Consolas"
+        Height="450" 
+        Width="800">
+    <Grid>
+        <StackPanel>
+            <DataGrid Name="ListGrid"   
+                  HorizontalAlignment="Left"  
+                  ItemsSource="{Binding Products}"   
+                  AutoGenerateColumns="False"    
+                  SelectionMode="Extended"   
+                  SelectionUnit="FullRow"   
+                  SelectedItem="{Binding SelectedProduct}"  
+                  >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Width="80" Binding="{Binding ID,Mode=TwoWay}"/>
+                    <DataGridTextColumn Header="Name" Width="80" Binding="{Binding Name,Mode=TwoWay}"/>
+                    <DataGridTextColumn Header="Description" Width="50" Binding="{Binding Description,Mode=TwoWay}" />
+                    <DataGridTextColumn Header="Type" Width="50" Binding="{Binding Type,Mode=OneTime}" />
+                    <DataGridTextColumn Header="Price" Width="50" Binding="{Binding Price,Mode=TwoWay}" />
+                    <DataGridCheckBoxColumn Header="In_Stock" Width="50" Binding="{Binding In_Stock,Mode=TwoWay}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <WrapPanel>
+                <Label Content="IsIn_Stock:"></Label>
+                <CheckBox  Background="Azure"  IsChecked="{Binding SelectedProduct.In_Stock, Mode=TwoWay}"></CheckBox>
+            </WrapPanel>
+            <StackPanel Width="200">
+                <Button Name="SaveToJSONFile" Click="SaveToJSONFile_Click">Save product to JSON</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
